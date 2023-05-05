@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'vcar2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jornal',
+        'NAME': 'vcar2',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',

@@ -18,3 +18,4 @@ class AluguelForm(ModelForm):
     class Meta:
         model = Aluguel
         fields = '__all__'
+

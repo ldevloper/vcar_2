@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% load bootstrap5 %}
+    {% block title %}Vcar - Cadastrar Cliente {% endblock title %}
+    {% block content %}
+    <h1>Vcar</h1>
+    <h2>Cadastrar Cliente:</h2>
+
+    <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+     Cadastrar 
+    </button>
+    {% endbuttons %}
+    </form>
+    {% endblock content %}

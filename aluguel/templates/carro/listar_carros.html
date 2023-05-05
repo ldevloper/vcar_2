@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+    {% block title %}Concessionária Vcar{% endblock title %}
+    {% block content %}
+    <h1>Vcar</h1>
+    <h2>Carros:</h2>
+    <ul class="list-group list-group-flush">
+        {% for carro in carros %}
+        <li class="list-group-item" ><a href="{% url 'detalhar_carro' carro.pk %}">{{ carro.modelo }}</a></li>
+        {% endfor %}
+    </ul>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="" role="button">Alugar</a>
+    </div>
+    {% endblock content %}

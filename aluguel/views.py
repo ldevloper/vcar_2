@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from .models import Carro, Aluguel
 from .forms import AluguelForm, ClienteForm
+from .admin import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 def index(request):
@@ -17,11 +19,13 @@ def detalhar_carro(request, pk):
     return render (request, "carro/detalhar_carro.html", context)
 
 
+@login_required
 def listar_aluguel(request):
-    alugel = Aluguel.objects.all()
-    context = {"alugel": alugel}
+    aluguel = Aluguel.objects.filter(user=request.user)
+    context = {'aluguel':aluguel}
     return render (request, "aluguel/listar_aluguel.html", context)
 
+@login_required
 def realizar_aluguel(request):
     if request.method == "POST":
         form = AluguelForm(request.POST)
@@ -47,3 +51,21 @@ def realizar_cadastro(request):
     else:
         form = ClienteForm()
         return render(request, "cliente/realizar_cadastro.html", {'form': form})
+
+def register(request):
+    form = CustomUserCreationForm()
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_valid = False
+            user.save()
+            return render(request, 'index.html')
+        
+        else:
+            print('invalid registration details')
+
+    return render(request, "registration/register.html",{"form":form})
+
+
